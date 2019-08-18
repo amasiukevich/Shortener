@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Url Shortener</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    </head>
+    <body>
+        <div class="container">
+            <h2>Our URL Shortener</h2>
+            <form action="" method="POST">
+                {{ form.csrf }}
+                <div class="form-group">
+                    <label for="url">Shorten your url: </label>
+                    <input type="text" class="form-control" id="url" name="url" placeholder="Type here your url">
+                </div>
+                <button class="btn btn-success" type="submit">Submit</button>
+            </form>
+            <br>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                        {% for message in messages %}
+                            {% if "Error" not in message[1]: %}
+                                <div class="alert alert-info">
+                                    <strong>Success!</strong> {{ message[1] }}
+                                </div>
+                            {% endif %}
+                            {% if "Error" in message[1]: %}
+                                <div class="alert alert-warning">
+                                    {{ message[1] }}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+    </body>
+</html>
